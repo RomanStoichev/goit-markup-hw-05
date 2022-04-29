@@ -55,8 +55,17 @@ ul {
   letter-spacing: 0.02em;
 
   color: var(--title-text-color);
+  position: relative;
+  content: "";
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-
+.site-nav .link::after {
+  position: absolute;
+  border-radius: 2px;
+  width: 0;
+  height: 4px;
+  color: var(--accent-color);
+}
 .site-nav .link:hover,
 .site-nav .link:focus {
   color: var(--accent-color);
@@ -64,7 +73,7 @@ ul {
 
 .contact-nav .link {
   display: flex;
-  flex-direction: row-reverse;
+
   align-items: center;
   padding-top: 32px;
   padding-bottom: 32px;
@@ -75,16 +84,21 @@ ul {
   letter-spacing: 0.02em;
 
   color: var(--primary-text-color);
+  content: "";
+  fill: currentColor;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .contact-nav .link:hover,
 .contact-nav .link:focus {
   color: var(--accent-color);
-  stroke: var(--accent-color);
+  fill: currentColor;
 }
 .link.current {
   color: var(--accent-color);
 }
 
+.site-nav > a::after {
+}
 /* hero */
 .hero-title {
   color: var(--primary-background-color);
@@ -97,25 +111,23 @@ ul {
 
   padding-bottom: 30px;
   width: 696px;
+  margin: 0 auto;
 }
 
 .container.hero {
-  justify-content: end;
-  align-items: center;
+  display: block;
   margin-left: auto;
   margin-right: auto;
-  flex-direction: column;
-  align-self: flex-end;
+
   padding: 200px 0;
 }
 /* sections */
 .section-title {
-  /* text-align: center; */
   color: var(--title-text-color);
   font-weight: 700;
-  font-size: 14px;
-  line-height: 1.143;
+
   letter-spacing: 0.03em;
+  text-align: center;
 }
 
 .section h2 {
@@ -124,24 +136,25 @@ ul {
   line-height: 1.16;
   text-align: center;
   letter-spacing: 0.03em;
-  padding-bottom: 50px;
+  margin-bottom: 50px;
 }
 .section h3 {
-  padding-bottom: 10px;
+  margin-top: 30px;
 }
-.section img {
+/* .section img {
   padding-bottom: 30px;
-}
-.section-title.team {
+} */
+/* .section-title.team {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.19px;
   letter-spacing: 0.03em;
   text-align: center;
-}
+} */
 /* buttons */
 .button {
-  margin: 0;
+  display: block;
+  margin: 0 auto;
 
   border: none;
   border-radius: 4px;
@@ -219,12 +232,11 @@ a {
   font-size: 18px;
   line-height: 2;
   letter-spacing: 0.06em;
+
+  margin-bottom: 4px;
 }
 .portfolio-text {
-  width: 322px;
-  height: 33px;
-
-  color: var(--title-text-color);
+  color: var(--primary-text-color);
   font-weight: 400;
   font-size: 16px;
   line-height: 1.88;
@@ -232,17 +244,15 @@ a {
 }
 /* container  выравниевание на странице */
 .container {
-  display: flex;
-  flex-direction: column;
   width: 1200px;
 
   margin-left: auto;
   margin-right: auto;
   padding: 0 15px;
 }
-.container-header {
+.container-inner {
   display: flex;
-  border-bottom: 1px solid #eeeeee;
+
   flex-direction: row;
 }
 .nav-items {
@@ -261,7 +271,7 @@ a {
 .contact-nav .item + .item {
   margin-left: 50px;
 }
-.main-nav {
+.header {
   display: flex;
   padding: 0 15px;
   background-color: var(--primary-background-color);
@@ -272,33 +282,33 @@ a {
   background-color: var(--primary-background-color);
 }
 .section.desc h3 {
+  font-size: 14px;
+  line-height: 16px;
   margin-top: 0;
+  text-align: inherit;
   padding-bottom: 10px;
 }
 /* section */
 .section {
   padding-bottom: 94px;
 }
-.section.team {
+.our-team {
   padding-top: 94px;
-  display: block;
-  margin: 0;
+  /* display: block; */
+  /* margin: 0; */
   background-color: var(--secondary-background-color);
 }
 
 .hero {
-  display: flex;
-  text-align: center;
-
+  padding: 200px 0;
   background-color: var(--background-color-hero-footer);
   background-image: url("../images/Img-hero.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  margin-top: 0;
-  /* margin-bottom: 94px; */
 }
 .footer {
+  padding: 60px 0;
   background-color: var(--background-color-hero-footer);
 }
 .feauters {
@@ -348,11 +358,11 @@ a {
   border-radius: 0px 0px 4px 4px;
   text-align: center;
 }
-.team-visual > img {
-}
+/* .team-visual > img {
+} */
 
 .team-visual > p {
-  padding-bottom: 16px;
+  margin-top: 10px;
 }
 .team-visual svg {
   max-width: 20px;
@@ -363,11 +373,12 @@ a {
   flex-direction: row;
   align-items: baseline;
   justify-content: center;
+  margin-top: 16px;
 }
 .icons {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   width: 44px;
   height: 44px;
 
@@ -378,46 +389,56 @@ a {
   border-radius: 50%;
   cursor: pointer;
 }
+.icons.icons:not(:last-child) {
+  margin-right: 10px;
+}
+.icons use {
+  width: 20px;
+  height: 20px;
+}
 
 .icons:nth-last-child() {
   margin-right: 10px;
 }
-.socialmedia {
-  fill: var(--icons-color);
-  stroke: var(--icons-color);
-}
-.socialmedia:hover,
-.socialmedia:focus {
-  stroke: var(--primary-background-color);
-  fill: var(--primary-background-color);
-}
-.icons:hover,
-.icons:focus {
-  background-color: var(--accent-color);
-}
-
 .socialmedia {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
+
+  fill: var(--icons-color);
+  stroke: var(--icons-color);
+}
+.socialmedia:hover,
+.socialmedia:focus,
+.socialmedia.link:hover,
+.socialmedia.link:focus {
+  stroke: var(--primary-background-color);
+  fill: var(--primary-background-color);
+  background-color: var(--accent-color);
+  border-radius: 50%;
 }
 
 .team > li + li {
   padding-left: 30px;
 }
 /* наши клиенты */
-.container.clients .section-title {
+
+.section.clients {
   padding-top: 94px;
-  padding-bottom: 50px;
 }
+
 .icons-clients-list {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  /* flex-direction: row; */
+
   align-items: center;
 }
+.icon-clients + .icon-clients {
+  margin-left: 30px;
+}
+
 .client {
   display: flex;
   justify-content: center;
@@ -443,26 +464,37 @@ a {
 }
 
 /*  футер */
-.container.footer {
+.container.foot {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+.footer-inner {
   display: flex;
-  flex-direction: row;
 }
 
 .footer-nav {
-  padding-top: 60px;
-  padding-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+
   margin-right: 70px;
+}
+.footer-nav > a {
+  padding-bottom: 20px;
 }
 
 .footer-icons {
-  padding-top: 72px;
-  padding-bottom: 100px;
+  margin-top: 12px;
 }
 .footer-icons-list {
+  margin-bottom: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+}
+.footer-icons-list > li {
+  margin-bottom: 0;
 }
 .footer-icons-list .icons:not(:last-child) {
   margin-right: 10px;
@@ -473,6 +505,10 @@ a {
 }
 
 .footer-icons .section-title {
+  font-size: 14px;
+  line-height: 16px;
+  text-transform: uppercase;
+  text-align: start;
   color: var(--primary-background-color);
   margin-bottom: 20px;
 }
@@ -495,9 +531,9 @@ a {
   padding-bottom: 9px;
   max-width: 231px;
 }
-.adress .contact {
+/* .adress .contact {
   padding-bottom: 60px;
-}
+} */
 /* стили портфолио */
 .container.portfolio {
   padding-bottom: 94px;
@@ -515,7 +551,7 @@ a {
 .filters {
   display: flex;
   /* flex-direction: row; */
-
+  border-top: 1px solid #eeeeee;
   justify-content: center;
   list-style: none;
   padding-top: 94px;
@@ -528,25 +564,30 @@ a {
 .item + li {
   padding-left: 8px;
 }
-.container.projects > ul {
-  /* display: flex;
-  justify-content: center; */
-  padding-bottom: 64px;
-}
+
 .projects.list {
   display: flex;
   flex-wrap: wrap;
+  width: 1200px;
   margin: 0;
-  padding-left: 30 px;
-  padding-bottom: 30px;
-  justify-content: space-between;
+
+  /* justify-content: space-between; */
 }
 
 .list-item {
+  width: 370px;
+  height: 404px;
   border: 1px solid #eeeeee;
   margin-bottom: 30px;
 }
-
+.list-item:not(:last-child) {
+  margin-right: 30px;
+}
+.list-item:nth-child(7),
+.list-item:nth-child(8),
+.list-item:nth-child(9) {
+  margin-bottom: 0;
+}
 .list-item:hover,
 .list-item:focus {
   background: #ffffff;
@@ -555,16 +596,7 @@ a {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
 }
-.projects.list > li:not (:last-child) {
-  padding-right: 30px;
-}
 
-.projects img {
-  padding-bottom: 20px;
-}
-.projects h3 {
-  padding-bottom: 4px;
-}
 .portfolio-list-text {
   padding: 20px 24px;
 }
